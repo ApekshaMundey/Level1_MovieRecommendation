@@ -64,14 +64,10 @@ LEVEL1_MovieRecommendation/
 
 1. Create an account on https://www.themoviedb.org/
 2. Generate an API key
-3. In Streamlit Cloud:
-   - Go to **App → Settings → Secrets**
-   - Add:
-
-  ```toml
-  TMDB_API_KEY = "your_api_key_here"
-4. In app.py, access it using:
+3. In app.py, access it using:
+```
   TMDB_API_KEY = st.secrets["TMDB_API_KEY"]
+```
 
 ---  
 
