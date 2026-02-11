@@ -91,7 +91,7 @@ pip install -r requirements.txt
 streamlit run app.py
 
 ### 🌐 Live Demo
-🔗 App URL: (Will add deployed link here once live)
+🔗 App URL: https://level1movierecommendation-3q6xdanjzt2ektcrf9vbak.streamlit.app/
 
 ---
 
