@@ -2,6 +2,43 @@ import streamlit as st
 import pickle
 import requests
 import time
+import os
+import gdown
+
+MOVIES_FILE_ID = "1ZP1XOOJjqO3GGu03oN3T-Y-1sZ8PVcwl"
+SIMILARITY_FILE_ID = "1-XMLnfl3voubnBIfNXqvJqykg-RMOp35"
+
+# ---------------- DOWNLOAD + LOAD DATA ----------------
+@st.cache_resource
+def load_data():
+
+    # Download movies.pkl if not exists
+    if not os.path.exists("movies.pkl"):
+        gdown.download(
+            f"https://drive.google.com/uc?id={MOVIES_FILE_ID}",
+            "movies.pkl",
+            quiet=False
+        )
+
+    # Download similarity.pkl if not exists
+    if not os.path.exists("similarity.pkl"):
+        gdown.download(
+            f"https://drive.google.com/uc?id={SIMILARITY_FILE_ID}",
+            "similarity.pkl",
+            quiet=False
+        )
+
+    # Load pickle files
+    movies = pickle.load(open("movies.pkl", "rb"))
+    similarity = pickle.load(open("similarity.pkl", "rb"))
+
+    return movies, similarity
+
+
+# Load once
+movies, similarity = load_data()
+movie_list = sorted(movies['title'].values)
+
 
 # ---------------- CONFIG ----------------
 TMDB_API_KEY = "8fd21cc1330345d94b2a3c31c45898ff"
@@ -11,16 +48,6 @@ st.set_page_config(
     page_icon="🎬",
     layout="wide"
 )
-
-# ---------------- LOAD DATA ----------------
-@st.cache_data
-def load_data():
-    movies = pickle.load(open("movies.pkl", "rb"))
-    similarity = pickle.load(open("similarity.pkl", "rb"))
-    return movies, similarity
-
-movies, similarity = load_data()
-movie_list = sorted(movies['title'].values)
 
 # ---------------- SESSION STATE ----------------
 if "selected_movie_id" not in st.session_state:
