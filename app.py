@@ -5,8 +5,8 @@ import time
 import os
 import gdown
 
-MOVIES_FILE_ID = "1ZP1XOOJjqO3GGu03oN3T-Y-1sZ8PVcwl"
-SIMILARITY_FILE_ID = "1-XMLnfl3voubnBIfNXqvJqykg-RMOp35"
+MOVIES_FILE_ID = st.secrets["MOVIES_FILE_ID"]
+SIMILARITY_FILE_ID = st.secrets["SIMILARITY_FILE_ID"]
 
 # ---------------- DOWNLOAD + LOAD DATA ----------------
 @st.cache_resource
@@ -41,7 +41,7 @@ movie_list = sorted(movies['title'].values)
 
 
 # ---------------- CONFIG ----------------
-TMDB_API_KEY = "8fd21cc1330345d94b2a3c31c45898ff"
+TMDB_API_KEY = st.secrets["TMDB_API_KEY"]
 
 st.set_page_config(
     page_title="Movie Recommendation System",
